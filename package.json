@@ -1,0 +1,16 @@
+{
+  "name": "form-nodejs",
+  "version": "1.0.0",
+  "description": "project on js, node JS, mongoDB, send mail(nodemailer), create pdf(pdfmake)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "js",
+    "nodeJS",
+    "mongoDB"
+  ],
+  "author": "Postoian Konstantin <hamelltonn@gmail.com>",
+  "license": "ISC"
+}
