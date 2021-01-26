@@ -12,14 +12,11 @@ Object.prototype.sayHellow = () => {
 
 person.sayHellow()
 
-// person.__proto__ = person.prototype()
-console.log(person.__proto__)
 
-
-let firstName = document.getElementById('contact-form')
-let lastName = document.getElementById('form_lastname')
-let userEmail = document.getElementById('form_email')
-let userPhone = document.getElementById('form_phone')
+let firstName = document.getElementById('contact-form').value
+let lastName = document.getElementById('form_lastname').value
+let userEmail = document.getElementById('form_email').value
+let userPhone = document.getElementById('form_phone').value
 
 let data = {
     firstName: firstName,
@@ -28,18 +25,24 @@ let data = {
     userPhone: userPhone
 }
 
-firstName.onsubmit = async (e) => {
+let sendRequest = (url, method, body = null) => {
+    const headers = {
+        'Content-type': 'application/json'
+    }
+    return fetch(url, {
+        method: method,
+        body: JSON.stringify(body),
+        headers: headers
+    })
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
+}
+
+firstName.onsubmit = (e) => {
     e.preventDefault()
 
-    let response = await fetch('/firstName', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-        // body: new FormData(firstName),
-        body: JSON.stringify(data),
-    }).then(
-        console.log('Form send!!!!')
-    )
+sendRequest('/', 'POST', data)
+.then(data => console.log(data))
+.catch(err => console.log(err))
+
 }
