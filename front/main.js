@@ -1,15 +1,10 @@
 
-let firstName = document.getElementById('contact-form').value
+let form = document.getElementById('contact-form').value
+let firstName = document.getElementById('form_name').value
 let lastName = document.getElementById('form_lastname').value
 let userEmail = document.getElementById('form_email').value
 let userPhone = document.getElementById('form_phone').value
 
-let data = {
-    firstName: firstName,
-    lastName: lastName,
-    userEmail: userEmail,
-    userPhone: userPhone
-}
 
 let sendRequest = (url, method, body = null) => {
     const headers = {
@@ -24,11 +19,20 @@ let sendRequest = (url, method, body = null) => {
     .catch(err => console.log(err))
 }
 
-firstName.onsubmit = (e) => {
+form.onsubmit = (e) => {
     e.preventDefault()
+    
+    let data = {
+        firstName: firstName,
+        lastName: lastName,
+        userEmail: userEmail,
+        userPhone: userPhone
+    }
 
 sendRequest('/', 'POST', data)
 .then(data => console.log(data))
 .catch(err => console.log(err))
+
+sendRequest('/')
 
 }

@@ -11,8 +11,13 @@ const userSchema = new Schema({
 const mailSchema = new Schema({
     email: String
 })
+const findSchema = new Schema({
+    message: String,
+    phone: Number 
+})
 
 module.exports = {
     userSchema,
-    mailSchema
+    mailSchema,
+    findSchema
 }

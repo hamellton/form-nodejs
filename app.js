@@ -4,10 +4,15 @@ const path = require('path')
 const { parse } = require('querystring')
 let mongo = require('./database/config')
 const User = require('./database/models')
-
+const modelFind = require('./database/models')
 
 const server = http.createServer((req, res) => {
-  mongo.db()
+  try {
+    mongo.db()
+    console.log('Connect to MongoDB!!!')
+  } catch (error) {
+    throw error
+  }
 
   let filePath = path.join(__dirname, 'front', req.url === '/' ? 'index.html' : req.url)
   const ext = path.extname(filePath)
@@ -54,17 +59,19 @@ const server = http.createServer((req, res) => {
     req.on('data', (data) => {
         body += data.toString()
     })
-    req.on('end', () => {
+    req.on('end', (req, res) => {
 
         let response = parse(body)
-        console.log(response)
-
         const user = new User(response);
-        user.save().then(() => console.log('response save'));
+        user.save().then(() => console.log('data saved!!!'));
         console.log(response)
     })
-    console.log('POST method has been done!!!')
+    console.log('POST method has started!!!')
     res.end('Data send on server!!!')
+
+} else if (req.method == 'GET' && req.url === '/query') {
+  let allUsers = modelFind.find()
+  .then(data => console.log(data))
 }
 
 })
