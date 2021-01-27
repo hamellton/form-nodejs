@@ -2,11 +2,12 @@ const http = require('http')
 const fs = require('fs')
 const path = require('path')
 const { parse } = require('querystring')
-// require('./mongoDB/config')
-// const userSchema = require('./database/schems')
+let mongo = require('./database/config')
+const User = require('./database/models')
 
 
 const server = http.createServer((req, res) => {
+  mongo.db()
 
   let filePath = path.join(__dirname, 'front', req.url === '/' ? 'index.html' : req.url)
   const ext = path.extname(filePath)
@@ -54,7 +55,12 @@ const server = http.createServer((req, res) => {
         body += data.toString()
     })
     req.on('end', () => {
+
         let response = parse(body)
+        console.log(response)
+
+        const user = new User(response);
+        user.save().then(() => console.log('response save'));
         console.log(response)
     })
     console.log('POST method has been done!!!')

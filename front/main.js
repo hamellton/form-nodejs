@@ -1,17 +1,3 @@
-let person = new Object({
-    name: 'test',
-    age: 45,
-    func() {
-        console.log('say hi!!!')
-    }
-})
-
-Object.prototype.sayHellow = () => {
-    console.log('say hellow')
-}
-
-person.sayHellow()
-
 
 let firstName = document.getElementById('contact-form').value
 let lastName = document.getElementById('form_lastname').value

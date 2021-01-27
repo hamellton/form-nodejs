@@ -1,7 +1,5 @@
 const { Schema } = require("mongoose");
 
-const Schema = mongoose.Schema
-
 const userSchema = new Schema({
     name: String,
     surname: String,
@@ -10,6 +8,11 @@ const userSchema = new Schema({
     message: String
 })
 
+const mailSchema = new Schema({
+    email: String
+})
+
 module.exports = {
-    userSchema
+    userSchema,
+    mailSchema
 }
